@@ -1,0 +1,24 @@
+﻿@model RankUp.Models.BoardUsers
+
+<tr>
+
+    <td>
+        @*<img src="~/Content/Corona-Admin/assets/images/faces/face1.jpg" alt="image" />*@
+        <span class="pl-2">@string.Concat(Model.user.firstName + " " + Model.user.lastName)</span>
+    </td>
+
+    <td> @Model.isAdmin </td>
+    <td> @Model.isAvailable </td>
+
+    <td>
+        <a class="btn btn-outline-success" asp-controller="BoardUsers" asp-action="EditBoardUser" asp-route-boardUserId="@Model.id">Edit</a>
+    </td>
+    <td>
+        @*<a class="btn btn-outline-success" asp-controller="BoardUsers" asp-action="ResetBoardUserPassword" asp-route-boardUserId="@boardUser.id">Reset Password</a>*@
+        <a class="btn btn-outline-success" onclick="showResetPasswordModal(@(Model.id), '@(Model.user.firstName)', '@(Model.user.lastName)')">Reset Password</a>
+    </td>
+    <td>
+        <a class="btn btn-outline-danger" onclick="showDeleteUserModal(@(Model.id), '@(Model.user.firstName)', '@(Model.user.lastName)')">Delete Member</a>
+        @*<button class="btn btn-outline-danger" onclick="showDeleteUserModal('@(boardUser.id, boardUser.user.firstName, boardUser.user.lastName.id)')">Delete</button>*@
+    </td>
+</tr>

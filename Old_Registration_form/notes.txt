@@ -1,0 +1,14 @@
+area: text box
+margin top w bottom: ll card
+input beside el label
+remove nationality
+change content el grade if Thanawya Amma
+upload el cv w el personal photo not required
+if unemployed don't show other section
+recaptcha at last step
+el phone 
+remove steps
+
+Green: #1DB954
+Grey: #ABABAB
+blue: #1a73e8

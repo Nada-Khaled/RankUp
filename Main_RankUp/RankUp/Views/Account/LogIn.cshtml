@@ -1,0 +1,93 @@
+﻿@{ 
+    Layout = null;
+}
+
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="log into RankUp. Adjust your profile and start using our FREE services. Request a CV review and much more.">
+    <meta name="keywords" content="">
+    <!-- Page Title -->
+    <title>RankUp - LogIn</title>
+    <!-- Favicon -->
+    <link href="~/Content/corporate-agency/images/favicon.ico" rel="icon">
+    <!-- Bundle -->
+    <link href="~/Content/vendor/css/bundle.min.css" rel="stylesheet">
+    <!-- Plugin Css -->
+    <link href="~/Content/vendor/css/LineIcons.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/css/revolution-settings.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/css/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/css/cubeportfolio.min.css" rel="stylesheet">
+    <!-- Style Sheet -->
+    <link href="~/Content/corporate-agency/css/navigation.css" rel="stylesheet">
+    <link href="~/Content/corporate-agency/css/line-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/corporate-agency/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="quote-content" id="LogInModal">
+        <!--Heading-->
+        <div class="pb-md-5 p-0 text-center">
+            <span class="text-pink font-weight-500 font-20">Welcome Back!</span>
+            <h3 style="font-size:1.2rem" class="font-weight-600 text-white mt-2">Enter Your Information to procceed</h3>
+        </div>
+        <!--Contact Form-->
+        <form class="contact-form" id="modal-contact-form-data" method="post" asp-controller="Account" asp-action="LogIn">
+
+            <div class="form-group">
+                <input class="form-control" id="mail" name="mail" placeholder="Email" required=""
+                       type="email">
+            </div>
+
+            <div class="form-group">
+                <input class="form-control" id="password" name="password" placeholder="Password" required=""
+                       type="password">
+            </div>
+
+            <div class="form-check">
+                <label class="checkbox-lable font-weight-200">
+                    Keep me logged in
+                    <input type="checkbox" name="rememberMe" id="rememberMe" value="true">
+                    <span class="checkmark"></span>
+                </label>
+            </div>
+            <!--Button-->
+            <div class="col-md-12">
+                <div class="form-check">
+                    <label class="font-weight-200 font-16" style="color: #1DB954;">Don't Have an Account? </label><a style="color: #1a73e8; padding-left:0.25rem;" asp-action="QuickRegister" asp-controller="Account">Sign Up</a>
+                </div>
+                <button style="margin-top:1rem" type="submit" class="btn btn-medium btn-rounded btn-pink">Log In</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+<style>
+    body, html {   
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display:table;
+}
+    body {
+        display: table-cell;
+        vertical-align: middle;
+        /*background-color:black;*/
+        background-image: url("../Content/corporate-agency/images/9144 (1).jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        /*filter: blur(8px);*/
+    }
+    #LogInModal {
+        display: table; /* shrinks to fit content */
+        margin: auto;
+        box-shadow: 5px 5px 15px black;
+        border-radius: 25px;
+    }
+
+</style>

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Admin Page";
+    Layout = null;
+}
+<a onclick="PreviewCV()">Download 2</a>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script>
+    function PreviewCV() {
+        $.ajax({
+            url: '@Url.Action("CheckAvailableCVs", "Admin")',
+            dataType: 'json',
+            contentType:"application/json; charset=utf-8",
+            success: function (result) {
+                if (result == "No CV") {
+                    alert("No CVs to review")
+                }
+                else {
+                    // open new tab
+                    window.open('GetLatestCV', '_blank', 'noreferrer')
+                    window.location.href = 'Review';
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+              }
+        });
+
+    }
+</script>

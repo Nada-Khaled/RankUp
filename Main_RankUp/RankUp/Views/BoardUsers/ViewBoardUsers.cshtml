@@ -1,0 +1,326 @@
+﻿@model RankUp.Models.BoardUsers
+
+@{
+
+    Layout = "~/Views/Shared/_navBar.cshtml";
+    ViewBag.Title = "RankUp - HR Panel";
+}
+
+<link rel="stylesheet" href="~/Content/BoardUsers/css/style.css" />
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="row ">
+            <div class="col grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Filter</h4>
+
+                        <form method="POST" id="filter-form" class="signup-form" action="FilterBoardUsers">
+
+                            <div class="row">
+
+                                <div class="col">
+                                    <div class="form-group row">
+                                        <p class="col-4">Name</p>
+                                        <div class="col-8">
+                                            <input style="color:white" type="text" class="form-control" id="name" name="userName">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="form-check form-check-flat form-check-primary">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" name="isAdmin"> Is Admin?<i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <div class="form-check form-check-flat form-check-primary">
+                                        <label class="form-check-label">
+                                            <input type="checkbox" class="form-check-input" name="isAvailable"> Is Available?<i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <button style="float:right" type="submit" class="btn btn-success">Search</button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <div class="col-6">
+                                <h4 style="display:inline" class="card-title">Board Users</h4>
+                            </div>
+
+                            <div class="col-6">
+                                <label id="totalHRCount" class="m-0">Total HR members: @ViewBag.AllBoardUsers.Count</label>
+                                <a style="float:right" class="m-0 btn btn-success create-new-button" id="addUser" asp-controller="BoardUsers" asp-action="AddNewHRMember">+ Add new HR member</a>
+                            </div>
+
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+
+                                        <th> Name </th>
+                                        <th> Is Admin </th>
+                                        <th> Is Available </th>
+
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var boardUser in ViewBag.AllBoardUsers)
+                                    {
+                                        <tr id="@boardUser.id">
+
+                                            <td>
+                                                @*<img src="~/Content/Corona-Admin/assets/images/faces/face1.jpg" alt="image" />*@
+                                                <span class="pl-2">@string.Concat(boardUser.user.firstName + " " + boardUser.user.lastName)</span>
+                                            </td>
+
+                                            <td> @boardUser.isAdmin </td>
+                                            <td> @boardUser.isAvailable </td>
+
+                                            <td>
+                                                <a class="btn btn-outline-success" asp-controller="BoardUsers" asp-action="EditBoardUser" asp-route-boardUserId="@boardUser.id">Edit</a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-outline-success" onclick="showResetPasswordModal(@(boardUser.id), '@(boardUser.user.firstName)', '@(boardUser.user.lastName)')">Reset Password</a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-outline-danger" onclick="showDeleteUserModal(@(boardUser.id), '@(boardUser.user.firstName)', '@(boardUser.user.lastName)')">Delete Member</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+</div>
+<!-- main-panel ends -->
+
+
+@*Delete User Confirmation Modal*@
+<div id="deleteUserModal" class="modal">
+
+    <div class="modal-content">
+        <div class="modal-headerr" style="text-align:center">
+            <span class="close" onclick="closeModal()">&times;</span>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <h5 id="deleteHeader" style="margin-bottom: 2rem"></h5>
+        </div>
+
+        <div style="text-align:center" class="modal-footer">
+            <button style="margin-left:auto;margin-right:auto" class="btn" onclick="closeModal()">Close</button>
+            <button style="margin-left:auto;margin-right:auto" class="btn" onclick="DeleteBoardUser()">Yes</button>
+
+        </div>
+    </div>
+</div>
+
+
+@*Reset Password Confirmation Modal*@
+<div id="ResetPasswordModal" class="modal">
+
+    <div class="modal-content">
+        <div class="modal-headerr" style="text-align:center">
+            <span class="close" onclick="closeModal()">&times;</span>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <h5 id="updatePasswordHeader" style="margin-bottom: 2rem"></h5>
+        </div>
+
+        <div style="text-align:center" class="modal-footer">
+            <button style="margin-left:auto;margin-right:auto" class="btn" onclick="closeModal()">Close</button>
+            <button style="margin-left:auto;margin-right:auto" class="btn" onclick="ResetBoardUserPassword()">Yes</button>
+
+        </div>
+    </div>
+</div>
+
+@*Confirmation msg either for deleting board user or reseting their password*@
+<div id="confirmationMsgModal" class="modal">
+
+    <div class="modal-content">
+        <div class="modal-headerr" style="text-align:center">
+            <span class="close" onclick="closeModal()">&times;</span>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <h5 id="confirmationHeader" style="margin-bottom: 2rem"></h5>
+        </div>
+
+        <div style="text-align:center" class="modal-footer">
+            <button style="margin-left:auto;margin-right:auto" class="btn" onclick="closeModal()">OK</button>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="loading-modal"><!-- Place at bottom of page --></div>
+
+
+
+<script>
+    var modal = "";
+    var selectedUserId = "";
+    var totalHRMembers = '@ViewBag.AllBoardUsers.Count';
+
+
+    function showDeleteUserModal(userId, userFirstName, userLastName) {//userId, userLastName, userFirstName) {
+
+        modal = document.getElementById('deleteUserModal');
+
+        selectedUserId = userId;
+        document.getElementById('deleteHeader').innerText = ("Are you sure you want to delete user: " + userFirstName + " " + userLastName);
+
+        modal.style.display = 'block';
+        // alert("showDeleteUserModal")
+    }
+
+    function showResetPasswordModal(userId, userFirstName, userLastName) {//userId, userLastName, userFirstName) {
+
+        // lih msh rady yb3t boardUser.user.Id ??????
+        console.log("user id is:")
+        console.log(userId)
+
+
+        modal = document.getElementById('ResetPasswordModal');
+
+        selectedUserId = userId;
+
+        document.getElementById('updatePasswordHeader').innerText = ("Are you sure you want to reset password for user: " + userFirstName + " " + userLastName);
+
+        modal.style.display = 'block';
+    }
+
+    function closeModal() {
+
+        modal.style.display = "none";
+    }
+
+    function DeleteBoardUser() {
+
+        modal.style.display = "none";
+
+        $.ajax({
+
+            url: '@Url.Action("DeleteBoardUser", "BoardUsers")',
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+
+            // to send parameters to the action:
+            data: { "deletedBoardUserId": selectedUserId },
+
+            success: function (result) {
+
+                if (result == "error") {
+
+                    console.log("success, but error :|")
+
+                    modal = document.getElementById("confirmationMsgModal");
+                    document.getElementById("confirmationHeader").innerText = "Couldn't delete user!"
+                    modal.style.display = 'block';
+
+                }
+                else {
+
+                    modal = document.getElementById("confirmationMsgModal");
+                    document.getElementById("confirmationHeader").innerText = "User have been deleted successfully"
+                    modal.style.display = 'block';
+
+                    document.getElementById(selectedUserId).style.display = 'none';
+
+                    totalHRMembers -= 1;
+
+                    document.getElementById("totalHRCount").innerText = "Total HR members: " + totalHRMembers;
+
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(">>> Error calling ajax!!!")
+                console.log(xhr)
+                console.log(ajaxOptions)
+                console.log(thrownError)
+            }
+
+
+        });
+
+    }
+
+    function ResetBoardUserPassword() {
+
+        modal.style.display = "none";
+
+        $.ajax({
+
+            url: '@Url.Action("ResetBoardUserPassword", "BoardUsers")',
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            // to send parameters to the action:
+            data: { boardUserId: selectedUserId },
+            success: function (result) {
+                if (result == "error") {
+
+                    modal = document.getElementById("confirmationMsgModal");
+                    document.getElementById("confirmationHeader").innerText = "Couldn't Reset password for user!"
+                    modal.style.display = 'block';
+
+                }
+                else {
+                    modal = document.getElementById("confirmationMsgModal");
+                    document.getElementById("confirmationHeader").innerText = "User's password have been updated successfully"
+                    modal.style.display = 'block';
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert("Error calling ajax!!");
+              }
+        });
+    }
+
+
+</script>
+

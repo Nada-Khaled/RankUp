@@ -1,0 +1,197 @@
+﻿@model RankUp.ViewModels.HRMember
+
+@{
+    Layout = "~/Views/Shared/_navBar.cshtml";
+    ViewBag.Title = "RankUp - Add New Board User";
+}
+
+<link rel="stylesheet" href="~/Content/BoardUsers/css/style.css" />
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="row ">
+            <div class="col grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+                        <form enctype="multipart/form-data" method="post" asp-controller="BoardUsers" asp-action="AddNewHRMember">
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+
+                                            <label asp-for='firstName' class="mb-0">First Name</label>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input style="color:white" class="form-control" id='firstName' name="firstName" type="text">
+                                            @* To display an error msg for this field*@
+                                            <span asp-validation-for='firstName' class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label asp-for='lastName' class="mb-0">Last Name</label>
+
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input style="color:white" class="form-control" id='lastName' name="lastName" type="text">
+                                            <span asp-validation-for='lastName' class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label asp-for='email' class="mb-0">Email</label>
+
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input style="color:white" class="form-control" id='email' name="email" type="email">
+                                            <span asp-validation-for='email' class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+
+
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label asp-for='phone' class="mb-0">Phone Number</label>
+
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input style="color:white" class="form-control" id='phone' name="phone">
+                                            <span asp-validation-for='phone' class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label asp-for='gender' class="mb-0">Gender</label>
+
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input class="mr-3" value="M" id='gender' name="gender" type="radio" checked>Male
+                                            <input class="mr-3 ml-3" value="F" id='gender' name="gender" type="radio">Female
+
+                                            <span asp-validation-for='gender' class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label asp-for='isAdmin' class="mb-0">Admin</label>
+
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input id='isAdmin' name="isAdmin" type="checkbox" checked value="True"><label class="ml-3 mr-3">Admin</label>
+                                            <span asp-validation-for='isAdmin' class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label asp-for='isAvailable' class="mb-0">Available</label>
+
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input id='isAdmin' name="isAvailable" type="checkbox" checked value="True"><label class="ml-3 mr-3">Available</label>
+
+                                            <span asp-validation-for='isAvailable' class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+
+                                    <button style="float:right" type="submit" class="btn btn-success mt-3 mb-0">Add</button>
+                                    @*<button style="float:right" type="submit" class="btn btn-success mt-3 mb-0" onclick="Confirm()">Add</button>*@
+                                    <a style="float:left" asp-controller="BoardUsers" asp-action="ViewBoardUsers" class="btn btn-success mt-3 mb-0">Back</a>
+
+                                </div>
+                            </div>
+
+                            @* To display all Validation Errors*@
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="loading-modal"><!-- Place at bottom of page --></div>
+
+
+@*Confirmation msg for creating new board user and their password*@
+<div id="confirmationMsgModal" class="modal">
+
+    <div class="modal-content">
+        <div class="modal-headerr" style="text-align:center">
+            <span class="close" onclick="closeModal()">&times;</span>
+
+        </div>
+
+
+        <div class="modal-body">
+
+            <h5 id="confirmationHeader" style="margin-bottom: 2rem"></h5>
+        </div>
+
+        <div style="text-align:center" class="modal-footer">
+            <button style="margin-left:auto;margin-right:auto" class="btn" onclick="closeModal()">OK</button>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    var modal = document.getElementById("confirmationMsgModal");
+
+    var userFirstName = document.getElementById("firstName").value;
+    var userLastName = document.getElementById("lastName").value;
+    var userName = userFirstName + " " + userLastName;
+
+
+
+    function closeModal() {
+
+        modal.style.display = "none";
+    }
+
+    function Confirm() {
+
+        modal.style.display = "block";
+
+        if ('@ViewBag.addNewHR' == 'True') {
+
+            // how to let any user to change his password ??????
+            document.getElementById("confirmationHeader").innerText = "New HR member " + userName + " has been created with password: RankUp@1234\nFeel free to let him change it";
+        }
+        else {
+
+            document.getElementById("confirmationHeader").innerText = "Can't add New HR member: " + userName;
+        }
+    }
+
+</script>
+

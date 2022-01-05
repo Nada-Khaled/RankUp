@@ -1,0 +1,179 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @*<meta name="author" content="colorlib.com">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">*@
+    <title>RankUp - Review Form</title>
+
+    <!-- Font Icon -->
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">*@
+    <link rel="stylesheet" href="~/Content/reviewAssets/fonts/material-icon/css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="~/Content/reviewAssets/vendor/nouislider/nouislider.min.css">
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/Content/reviewAssets/css/style.css">
+</head>
+<body>
+    <div class="">
+        <div class="">
+            <form method="POST" id="signup-form" class="signup-form" action="Review">
+                <div>
+                    @{string id = "";
+                        @foreach (var section in ViewBag.sections)
+                        {
+
+                            <h3>@(section.name)</h3>
+                            <fieldset>
+                                <h2>@(section.name)</h2>
+                                <div class="fieldset-content">
+                                    @foreach (var question in ViewBag.questions)
+                                    {
+                                        if (question.section.id == section.id)
+                                        {
+                                            <div class="question @(section.id)" style="padding:4px">
+
+                                                <label class="form-label">@question.name</label>
+                                                @if (question.questionType.id == 1)
+                                                {
+                                                    foreach (var option in ViewBag.options)
+                                                    {
+                                                        if (option.question.id == question.id)
+                                                        {
+                                                            id = string.Concat("S", section.id, "O", option.id);
+                                                            <div style="margin-bottom:5px">
+                                                                <input name=@id id=@id type="checkbox" value="@option.name">
+                                                                <label class="input-label"> @option.name</label>
+                                                            </div>
+                                                        }
+
+                                                    }
+                                                }
+                                                else @if (question.questionType.id == 4)
+                                           {
+                                               foreach (var option in ViewBag.options)
+                                               {
+                                                   if (option.question.id == question.id)
+                                                   {
+                                                       id = string.Concat("S", section.id, "Q", question.id);
+
+                                                    <div style="margin-bottom:5px">
+                                                        <input name="@id" type="radio" value="@option.name" onchange="toggleInputRadio('@id')">
+                                                        <label class="input-label"> @option.name</label>
+                                                    </div>
+                                                }
+                                            }
+                                            id = string.Concat("S", section.id, "Q", question.id);
+                                            <div class="additional-info">
+                                                <input type="radio" name="@id" value="other" class="other-info-checkbox testradio" onchange="toggleInputRadio('@id')">
+                                                <label class="input-label" for="other-info">Other:</label>
+                                                <input name=@id id="@id" type="text" class="other-info-input" style="display:none;" />
+                                            </div>
+                                        }
+                                        else if (question.questionType.id == 2)
+                                        {
+                                            id = string.Concat("S", section.id, "Q", question.id);
+
+                                            <div class="slidecontainer" style="text-align:center" id=@id>
+                                                <span style="float:left;font-weight:bold">0</span>&nbsp&nbsp<span style="font-weight: bold">5</span><span style="float: right; font-weight: bold">10</span><input oninput="showValue('@id')" type="range" min="0" max="10" value="5" class="slider">
+                                                <div style="text-align:left; justify-content:left">
+                                                    <p style="float:left">@question.name rating: <input readonly name="@id" style="font:16px;border:none;outline:none;background:transparent;margin-top:3px" type="text" value="5"></p>
+                                                </div>
+                                                <br />
+                                                <br />
+                                            </div>
+                                        }
+                                        else if (question.questionType.id == 3)
+                                        {
+                                            id = string.Concat("S", section.id, "Q", question.id);
+
+                                            <div class="additional-info">
+                                                <input name=@id id=@id type="text" class="other-info-input">
+                                            </div>
+                                        }
+                                        @*else if (question.questionType.id == 3)
+                                                {
+                                                    id = string.Concat("S", section.id, "Q", question.id);
+
+                                            <div class="additional-info">
+                                                <input name=@id id=@id type="text" class="other-info-input">
+                                            </div>
+                                            }*@
+                                                @if (question.questionType.id != 2 && question.questionType.id != 4)
+                                                {
+                                                    id = string.Concat("S", section.id, "O", ViewBag.options.Count + 1);
+
+                                                    <div class="additional-info">
+                                                        <input type="checkbox" class="other-info-checkbox" onchange="toggleInputCheckbox('@id')">
+                                                        <label class="input-label" for="other-info">Other:</label>
+                                                        <input id="@id" name=@id type="text" class="other-info-input" style="display:none;" />
+                                                    </div>
+                                                }
+                                                <div class="zmdi zmdi-info zmdi-hc-lg error-message">
+                                                </div>
+                                            </div>
+                                            <hr />
+                                        }
+                                    }
+                                </div>
+                            </fieldset>
+                        }}
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="~/Content/reviewAssets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/reviewAssets/vendor/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/Content/reviewAssets/vendor/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/Content/reviewAssets/vendor/jquery-steps/jquery.steps.min.js"></script>
+    <script src="~/Content/reviewAssets/vendor/minimalist-picker/dobpicker.js"></script>
+    <script src="~/Content/reviewAssets/vendor/nouislider/nouislider.min.js"></script>
+    <script src="~/Content/reviewAssets/vendor/wnumb/wNumb.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="~/Content/reviewAssets/js/main.js"></script>
+    <script>
+        function showValue(id) {
+            var sliderValue = document.getElementById(id).getElementsByTagName('input')[0].value;
+            document.getElementById(id).getElementsByTagName('input')[1].value = sliderValue;
+        }
+    </script>
+    <script>
+        function toggleInputCheckbox(id) {
+            var parentNode = document.getElementById(id).parentNode;
+            var checkboxStatus = parentNode.querySelectorAll('input[type="checkbox"]')[0].checked;
+            var otherInput = document.getElementById(id);
+            if (checkboxStatus) {
+                otherInput.style.display = "inline";
+            }
+            else
+                otherInput.style.display = "none";
+
+        }
+
+        function toggleInputRadio(id) {
+
+            // WE NEED TO HANDLE THE VALUE PROPERTY FOR THIS RADIO TO BE = INPUT_TEXT.TEXT
+
+            var radioButtonValue = $("input[type='radio'][name='" + id + "']:checked").val();
+
+            if (radioButtonValue == "other") {
+                document.getElementById(id).style.display = "inline";
+            }
+            else {
+                document.getElementById(id).style.display = "none";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

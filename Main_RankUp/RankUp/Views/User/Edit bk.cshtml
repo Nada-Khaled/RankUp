@@ -1,0 +1,342 @@
+﻿@model RankUp.Models.User
+
+@{ Layout = null; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>RankUp - Edit Profile</title>
+    <link href="~/Content/corporate-agency/images/favicon.ico" rel="icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/Content/UserProfile/js/jquery-1.10.min.js"></script>
+    <link href="~/Content/UserProfile/css/boostrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/UserProfile/css/style.css" />
+
+    <script src="~/Content/UserProfile/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    @{
+        Html.HiddenFor(Model => Model.AccessFailedCount);
+        Html.HiddenFor(Model => Model.ConcurrencyStamp);
+        Html.HiddenFor(Model => Model.CV);
+        Html.HiddenFor(Model => Model.EmailConfirmed);
+        Html.HiddenFor(Model => Model.Id);
+        Html.HiddenFor(Model => Model.jobStartDate);
+        Html.HiddenFor(Model => Model.LockoutEnabled);
+        Html.HiddenFor(Model => Model.LockoutEnd);
+        Html.HiddenFor(Model => Model.NormalizedEmail);
+        Html.HiddenFor(Model => Model.NormalizedUserName);
+        Html.HiddenFor(Model => Model.PasswordHash);
+        Html.HiddenFor(Model => Model.PhoneNumberConfirmed);
+        Html.HiddenFor(Model => Model.photo);
+        Html.HiddenFor(Model => Model.SecurityStamp);
+        Html.HiddenFor(Model => Model.TwoFactorEnabled);
+        Html.HiddenFor(Model => Model.UserName);
+    }
+    <div class="container">
+        <div class="main-body">
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                </ol>
+            </nav>
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="#ABABAB" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                </svg>
+                                <div class="mt-3">
+                                    <h3>@(Model.firstName+" "+Model.lastName)</h3>
+                                    <h5>@Model.jobTitle</h5> <p class="text-secondary">@Model.company</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mt-3">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#1DB954" class="bi bi-file-earmark-person-fill" viewBox="0 0 16 16">
+                                    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm2 5.755V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-.245S4 12 8 12s5 1.755 5 1.755z" />
+                                </svg>
+                                <button class="btn btn-info " href="" onclick="requestCVReview()">Request a CV review</button>
+
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#1DB954" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                    <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
+                                </svg>
+                                <button class="btn btn-info " href="" onclick="">Request LinkedIn review</button>
+
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#1DB954" class="bi bi-person-check-fill" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                    <path d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                </svg>
+                                <button class="btn btn-info " href="" onclick="">Request Interview simulation</button>
+
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="#1DB954" class="bi bi-newspaper" viewBox="0 0 16 16">
+                                    <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z" />
+                                    <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z" />
+                                </svg>
+                                <button class="btn btn-info " href="" onclick="">Subscribe to newsteller</button>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+
+                    <form enctype="multipart/form-data" method="post" asp-controller="User" asp-action="Edit">
+                        
+                            @Html.HiddenFor(Model => Model.AccessFailedCount)
+                            @Html.HiddenFor(Model => Model.ConcurrencyStamp)
+                            @Html.HiddenFor(Model => Model.CV)
+                            @Html.HiddenFor(Model => Model.EmailConfirmed)
+                            @Html.HiddenFor(Model => Model.Id)
+                            @Html.HiddenFor(Model => Model.jobStartDate)
+                            @Html.HiddenFor(Model => Model.LockoutEnabled)
+                            @Html.HiddenFor(Model => Model.LockoutEnd)
+                            @Html.HiddenFor(Model => Model.NormalizedEmail)
+                            @Html.HiddenFor(Model => Model.NormalizedUserName)
+                            @Html.HiddenFor(Model => Model.PasswordHash)
+                            @Html.HiddenFor(Model => Model.PhoneNumberConfirmed)
+                            @Html.HiddenFor(Model => Model.photo)
+                            @Html.HiddenFor(Model => Model.SecurityStamp)
+                            @Html.HiddenFor(Model => Model.TwoFactorEnabled)
+                            @Html.HiddenFor(Model => Model.UserName)
+                        
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        @*<h6 class="mb-0">First Name</h6>*@
+                                        <label asp-for="@Model.firstName" class="mb-0"></label>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input asp-for="@Model.firstName" type="text" value="@Model.firstName">
+                                        @* To display an error msg for this field*@
+                                        <span asp-validation-for="@Model.firstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label asp-for="@Model.lastName" class="mb-0"></label>
+
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input asp-for="@Model.lastName" type="text" value="@Model.lastName">
+                                        <span asp-validation-for="@Model.lastName" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label asp-for="@Model.Email" class="mb-0"></label>
+
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input asp-for="@Model.Email" type="text" value=@Model.Email>
+                                        <span asp-validation-for="@Model.Email" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                                <hr>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label asp-for="@Model.PhoneNumber" class="mb-0"></label>
+
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input asp-for="@Model.PhoneNumber" type="text" value="@Model.PhoneNumber">
+                                        @*<span asp-validation-for="@Model.PhoneNumber" class="text-danger"></span>*@
+
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        @*edit this h6 tp be label as above*@
+                                        <h6 class="mb-0">Address</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        @*  missing  asp-for="@Model.city"*@
+                                        <input type="text" value="">
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label asp-for="@Model.jobTitle" class="mb-0"></label>
+
+                                    </div>
+
+                                    <div class="col-sm-9 text-secondary">
+                                        <input asp-for="@Model.jobTitle" type="text" value="@Model.jobTitle">
+
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label asp-for="@Model.gender" class="mb-0"></label>
+
+                                    </div>
+
+                                    <div class="col-sm-9 text-secondary">
+                                        @if (!string.IsNullOrEmpty((@Model.gender).ToString()) && Model.gender == 'M')
+                                        {
+                                            <input name="gender" type="radio" value="M" checked><label>Male</label>
+                                            <input name="gender" type="radio" value="F"><label>Female</label>
+                                        }
+                                        else
+                                        {
+                                            <input name="gender" type="radio" value="M"><label>Male</label>
+                                            <input name="gender" type="radio" value="F" checked><label>Female</label>
+                                        }
+                                        <span asp-validation-for="@Model.gender" class="text-danger"></span>
+
+                                    </div>
+                                </div>
+                                <hr />
+
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label asp-for="@Model.company" class="mb-0"></label>
+
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input asp-for="@Model.company" type="text" value=@Model.company>
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label asp-for="@Model.jobStatus" class="mb-0"></label>
+
+                                    </div>
+
+                                    <div class="col-sm-9 text-secondary">
+                                        <input asp-for="@Model.jobStatus" type="text" value="@Model.jobStatus">
+
+                                    </div>
+                                </div>
+
+                                <hr />
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="">
+                                        <h6 class="mb-0">Current CV</h6>
+                                    </div>
+
+                                    <div>
+                                        @if (!string.IsNullOrEmpty(Model.CV))
+                                        {
+                                            <button type="button" href="" class="btn btn-info" onclick="window.open('../CVs/@Model.CV', '_blank'); return false;">Show CV</button>
+                                        }
+                                        else
+                                        {
+                                            <button disabled>Show CV</button>
+                                            <p style="display:inline">No CV Uploaded</p>
+                                        }
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <div class="d-flex justify-content-between align-items-center">
+
+                                    <div class="">
+                                        @*<button class="btn btn-info " target="__blank" href="">Save Changes</button>*@
+                                        <button type="submit" class="btn btn-info">Save Changes</button>
+                                    </div>
+
+                                    <div>
+                                        @if (!string.IsNullOrEmpty(Model.CV))
+                                        {
+                                            <button type="button" style="float:right" class="btn btn-info" onclick="uploadCV()">Change CV</button> }
+                                        else
+                                        {
+                                            <button type="button" style="float:right" class="btn btn-info" onclick="uploadCV()">Upload CV</button>}
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        @* To display all Validation Errors*@
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <form enctype="multipart/form-data" method="post" asp-controller="User" asp-action="UploadCV">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-headerr">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <h2>Upload your CV</h2>
+                </div>
+                <div class="modal-body">
+                    <p>Select your CV</p>
+                    <input type="file" id="CVFile" name="CVFile" required>
+                </div>
+                <div style="text-align:center" class="modal-footer">
+                    <button type="submit">Done</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="loading-modal"><!-- Place at bottom of page --></div>
+
+    <script>
+
+    var modal = document.getElementById("myModal");
+        function uploadCV() {
+            // Get the <span> element that closes the modal
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            var span = document.getElementsByClassName("close")[0];
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById("myModal")) {
+                modal.style.display = "none";
+            }
+        }</script>
+
+</body>
+
+</html>

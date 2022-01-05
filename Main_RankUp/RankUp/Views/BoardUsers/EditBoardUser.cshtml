@@ -1,0 +1,147 @@
+﻿@model RankUp.Models.BoardUsers
+
+@{
+    Layout = "~/Views/Shared/_navBar.cshtml";
+    ViewBag.Title = "RankUp - Edit Board User";
+}
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="row ">
+            <div class="col grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+                        <form enctype="multipart/form-data" method="post" asp-controller="BoardUsers" asp-action="EditBoardUser">
+
+
+                            @Html.HiddenFor(Model => Model.id)
+                            @Html.HiddenFor(Model => Model.CVsReviewed)
+                            @Html.HiddenFor(Model => Model.user)
+                            @Html.HiddenFor(Model => Model.user.Id)
+                            @Html.HiddenFor(Model => Model.user.CV)
+                            @Html.HiddenFor(Model => Model.user.PhoneNumber)
+                            @Html.HiddenFor(Model => Model.user.industry)
+                            @Html.HiddenFor(Model => Model.user.univeristy)
+                            @Html.HiddenFor(Model => Model.user.jobStartDate)
+                            @Html.HiddenFor(Model => Model.user.jobStatus)
+                            @Html.HiddenFor(Model => Model.user.jobTitle)
+                            @Html.HiddenFor(Model => Model.user.gender)
+                            @Html.HiddenFor(Model => Model.user.Email)
+                            @Html.HiddenFor(Model => Model.user.company)
+                            @Html.HiddenFor(Model => Model.user.country)
+                            @Html.HiddenFor(Model => Model.user.state)
+                            @Html.HiddenFor(Model => Model.user.area)
+                            @Html.HiddenFor(Model => Model.user.birthDate)
+                            @Html.HiddenFor(Model => Model.user.AccessFailedCount)
+                            @Html.HiddenFor(Model => Model.user.ConcurrencyStamp)
+                            @Html.HiddenFor(Model => Model.user.EmailConfirmed)
+                            @Html.HiddenFor(Model => Model.user.jobStartDate)
+                            @Html.HiddenFor(Model => Model.user.LockoutEnabled)
+                            @Html.HiddenFor(Model => Model.user.LockoutEnd)
+                            @Html.HiddenFor(Model => Model.user.NormalizedEmail)
+                            @Html.HiddenFor(Model => Model.user.NormalizedUserName)
+                            @Html.HiddenFor(Model => Model.user.PasswordHash)
+                            @Html.HiddenFor(Model => Model.user.PhoneNumberConfirmed)
+                            @Html.HiddenFor(Model => Model.user.photo)
+                            @Html.HiddenFor(Model => Model.user.SecurityStamp)
+                            @Html.HiddenFor(Model => Model.user.TwoFactorEnabled)
+                            @Html.HiddenFor(Model => Model.user.UserName)
+
+
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+
+                                            <label asp-for='user.firstName' class="mb-0">First Name</label>
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input class="form-control" name='user.firstName' id='user.firstName' type="text" value='@Model.user.firstName'>
+                                            @* To display an error msg for this field*@
+                                            <span asp-validation-for='user.firstName' class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label asp-for='user.lastName' class="mb-0">Last Name</label>
+
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            <input class="form-control" name='user.lastName' id="user.lastName" type="text" value='@Model.user.lastName'>
+                                            <span asp-validation-for='user.lastName' class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label asp-for='isAdmin' class="mb-0">Admin</label>
+
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            @if (Model.isAdmin == true)
+                                            {
+                                                <input id='isAdmin' type="radio" name="isAdmin" value="True" checked><label class="ml-3 mr-3">Admin</label>
+                                                <input id='isAdmin' type="radio" name="isAdmin" value="False"><label class="ml-3 mr-3">Not an Admin</label>
+
+                                            }
+                                            else
+                                            {
+                                                <input id='isAdmin' type="radio" name="isAdmin" value="True"><label class="ml-3 mr-3">Admin</label>
+                                                <input id='isAdmin' type="radio" name="isAdmin" value="False" checked><label class="ml-3 mr-3">Not an Admin</label>
+
+                                            }
+                                            <span asp-validation-for='isAdmin' class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+                                    <hr>
+
+                                    <div class="form-group row">
+                                        <div class="col-sm-3">
+                                            <label asp-for='isAvailable' class="mb-0">Available</label>
+
+                                        </div>
+                                        <div class="col-sm-9 text-secondary">
+                                            @if (Model.isAvailable == true)
+                                            {
+                                                <input id='isAvailable' type="radio" name="isAvailable" value="True" checked><label class="ml-3 mr-3">Available</label>
+                                                <input id='isAvailable' type="radio" name="isAvailable" value="False"><label class="ml-3 mr-3">Not Available</label>
+
+                                            }
+                                            else
+                                            {
+                                                <input id='isAvailable' type="radio" name="isAvailable" value="True"><label class="ml-3 mr-3">Available</label>
+                                                <input id='isAvailable' type="radio" name="isAvailable" value="False" checked><label class="ml-3 mr-3">Not Available</label>
+
+                                            }
+                                            <span asp-validation-for='isAvailable' class="text-danger"></span>
+
+                                        </div>
+                                    </div>
+
+                                    <button style="float:right" type="submit" class="btn btn-success mt-3 mb-0">Save</button>
+                                    <a style="float:left" asp-controller="BoardUsers" asp-action="ViewBoardUsers" class="btn btn-success mt-3 mb-0">Back</a>
+
+                                </div>
+                            </div>
+
+                            @* To display all Validation Errors*@
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

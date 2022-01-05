@@ -1,0 +1,605 @@
+﻿@model RankUp.Models.User
+
+@{ Layout = null; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>RankUp - profile</title>
+    <link href="~/Content/corporate-agency/images/favicon.ico" rel="icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/Content/UserProfile/js/jquery-1.10.min.js"></script>
+    <link href="~/Content/UserProfile/css/boostrap.min.css" rel="stylesheet">
+    
+    @*need to handle this file*@ 
+    @*<link rel="stylesheet" href="~/Content/Corona-Admin/assets/css/style.css">*@
+
+    <link rel="stylesheet" href="~/Content/UserProfile/css/style.css" />
+
+    @* <link rel="stylesheet" href="~/Content/BoardUsers/css/style.css" />*@
+
+    <script src="~/Content/UserProfile/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="main-body">
+            <nav aria-label="breadcrumb" class="main-breadcrumb">
+                <ol class="breadcrumb">
+                </ol>
+            </nav>
+            <div class="row gutters-sm">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" fill="#ABABAB" class="bi bi-person-circle" viewBox="0 0 16 16">
+                                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+                                </svg>
+                                <div class="mt-3">
+                                    <h3>@string.Concat(Model.firstName, " ", Model.lastName)</h3>
+                                    <h5>@Model.jobTitle</h5>
+                                    @if (!string.IsNullOrEmpty(Model.company))
+                                    {
+                                        <p class="text-secondary">at @Model.company</p>}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-3">
+                        <ul class="list-group list-group-flush services">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+
+                                <button style="width:100%" class="btn btn-info" href="" onclick="requestCVReview()">
+                                    <span style="float:left">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
+                                            <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                            <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z" />
+                                        </svg>
+                                    </span>Request a CV review
+                                </button>
+
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+
+                                <button style="width:100%" class="btn btn-info " href="" onclick="">
+                                    <span style="float:left">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                            <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
+                                        </svg>
+                                    </span>Request LinkedIn review
+                                </button>
+
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+
+                                <button style="width:100%" class="btn btn-info " href="" onclick="">
+                                    <span style="float:left">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+                                            <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                            <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                        </svg>
+                                    </span>Request Interview simulation
+                                </button>
+
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+
+                                <button style="width:100%" class="btn btn-info " href="" onclick="">
+                                    <span style="float:left">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="white" class="bi bi-newspaper" viewBox="0 0 16 16">
+                                            <path d="M0 2.5A1.5 1.5 0 0 1 1.5 1h11A1.5 1.5 0 0 1 14 2.5v10.528c0 .3-.05.654-.238.972h.738a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 1 1 0v9a1.5 1.5 0 0 1-1.5 1.5H1.497A1.497 1.497 0 0 1 0 13.5v-11zM12 14c.37 0 .654-.211.853-.441.092-.106.147-.279.147-.531V2.5a.5.5 0 0 0-.5-.5h-11a.5.5 0 0 0-.5.5v11c0 .278.223.5.497.5H12z" />
+                                            <path d="M2 3h10v2H2V3zm0 3h4v3H2V6zm0 4h4v1H2v-1zm0 2h4v1H2v-1zm5-6h2v1H7V6zm3 0h2v1h-2V6zM7 8h2v1H7V8zm3 0h2v1h-2V8zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1zm-3 2h2v1H7v-1zm3 0h2v1h-2v-1z" />
+                                        </svg>
+                                    </span>Subscribe to newsteller
+                                </button>
+
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="card mt-3">
+
+                        @if (ViewBag.cvRequests.Count != 0)
+                        {
+                            <div class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <span style="float:left">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
+                                        <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                                        <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z" />
+                                    </svg>
+                                </span>Total CV review requests: @ViewBag.cvRequests.Count
+                            </div>
+
+                        }
+
+
+                        @if (ViewBag.linkedInRequests.Count != 0)
+                        {
+                            @*<div class="card mb-3 card-body" style="text-align:center">
+
+                                    <p>Total LinkedIn requests: @ViewBag.linkedInRequests.Count</p>
+                                </div>*@
+
+                            <div class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <span style="float:left">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
+                                        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z" />
+                                    </svg>
+                                </span>Total LinkedIn requests: @ViewBag.linkedInRequests.Count
+                            </div>
+
+                        }
+
+
+                        @if (ViewBag.interviewRequests.Count != 0)
+                        {
+                            @*<div class="card mb-3 card-body" style="text-align:center">
+
+                                    <p>Total Interview requests: @ViewBag.interviewRequests.Count</p>
+                                </div>*@
+
+                            <div class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <span style="float:left">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-check" viewBox="0 0 16 16">
+                                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                        <path fill-rule="evenodd" d="M15.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L12.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+                                    </svg>
+                                </span>Total Interview requests: @ViewBag.interviewRequests.Count
+                            </div>
+
+                        }
+                    </div>
+
+                    @*select a request's type*@
+
+                <!--<div class="card mt-3">
+
+                    <div class="row grid-margin">
+                        <h5 class="card-title">Select type of your requests to show review</h5>
+
+                        <select id="operation"--> @*style="text-align:center;font-size:0.9rem"*@ <!--class="form-control form-control-lg" onchange="showRequestDetails()">
+                            <option value="" disabled selected hidden>-- Select type of Request --</option>
+                            <option value="cv">CV Request</option>
+                            <option value="linkedin">LinkedIn Request</option>
+                            <option value="iv">Interview simulation request</option>
+                        </select>
+
+                    </div>
+                </div>-->
+
+
+                </div>
+
+
+                <div class="col-md-8">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @string.Concat(@Model.firstName, " ", Model.lastName)
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.Email
+                                </div>
+                            </div>
+                            <hr>
+                            @*<div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Phone</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        @Model.PhoneNumber
+                                    </div>
+                                </div>
+                                <hr>*@
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Mobile</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.PhoneNumber
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Address</h6>
+                                </div>
+
+                                @if (!string.IsNullOrEmpty(Model.country) || !string.IsNullOrEmpty(Model.state) || !string.IsNullOrEmpty(Model.area))
+                                {
+                                    <div class="col-sm-9 text-secondary">
+                                        Model.country + " " + Model.state + " " + Model.area
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-9 text-secondary">
+                                        N / A
+                                    </div>
+                                }
+
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Job Title</h6>
+                                </div>
+
+                                @if (!string.IsNullOrEmpty(Model.jobTitle))
+                                {
+                                    <div class="col-sm-9 text-secondary">
+                                        @Model.jobTitle
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-9 text-secondary">
+                                        N / A
+                                    </div>
+                                }
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Gender</h6>
+                                </div>
+
+                                <div class="col-sm-9 text-secondary">
+                                    @Model.gender
+                                </div>
+                            </div>
+                            <hr />
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Company</h6>
+                                </div>
+                                @if (!string.IsNullOrEmpty(Model.company))
+                                {
+                                    <div class="col-sm-9 text-secondary">
+                                        @Model.company
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-9 text-secondary">
+                                        N / A
+                                    </div>
+                                }
+
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Job Status</h6>
+                                </div>
+
+                                @if (!string.IsNullOrEmpty(Model.jobStatus))
+                                {
+                                    <div class="col-sm-9 text-secondary">
+                                        @Model.jobStatus
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-sm-9 text-secondary">
+                                        N / A
+                                    </div>
+                                }
+                            </div>
+                            <hr />
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="">
+                                    <h6 class="mb-0">Current CV</h6>
+                                </div>
+
+                                <div>
+                                    @if (!string.IsNullOrEmpty(Model.CV))
+                                    {
+                                        <button href="" class="btn btn-info" onclick="window.open('../CVs/@Model.CV', '_blank'); return false;">Show CV</button> }
+                                    else
+                                    {
+                                        @*<button disabled>Show CV</button>*@
+                                        <p style="display:inline">No CV Uploaded</p>}
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <div class="">
+                                    <button class="btn btn-info " onclick="window.location='@Url.Action("Edit","User")'">Edit</button>
+                                    @*<a class="btn btn-info " asp-action="Edit" asp-controller="User">Edit</a>*@
+                                </div>
+                                <div>
+                                    @if (!string.IsNullOrEmpty(Model.CV))
+                                    {
+                                        <button style="float:right" href="" class="btn btn-info changeCvBtn" onclick="uploadCV(event)">Change CV</button> }
+                                    else
+                                    {
+                                        <button style="float:right" href="" class="btn btn-info" onclick="uploadCV(event)">Upload CV</button>
+                                    }
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    @if (ViewBag.pendingRequests.Count != 0)
+                    {
+                        <div class="card mb-3 card-body" style="text-align:center">
+
+                            <h5> Total pending Requests: @ViewBag.pendingRequests.Count</h5>
+                            <table class="table" style="color: white; ">
+                                <thead>
+                                    <tr>
+                                        <th> Request Id </th>
+                                        <th> Request Type </th>
+                                        <th> Request Status </th>
+                                        <th> Request Date </th>
+                                    </tr>
+                                </thead>
+
+                                @foreach (var request in ViewBag.pendingRequests)
+                                {
+                                    <tr>
+                                        <td>@request.id</td>
+                                        <td>@request.requestType</td>
+                                        <td>@request.status</td>
+                                        <td>@request.RequestDate</td>
+
+                                    </tr>
+                                }
+                            </table>
+
+                        </div>
+                    }
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    @*Modal for uploading CV in case of requesting review without having CV*@
+    <div id="uploadAndRequestReviewModal" class="modal">
+        <form enctype="multipart/form-data" method="post" asp-controller="User" asp-action="UploadCVAndRequestReview">
+
+            <div class="modal-content">
+
+                <div class="modal-headerr">
+                    <h5 style="text-align:center"><span>You can't submit a request without uploading your CV</span><span class="close" onclick="closeModal()">&times;</span></h5>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <h5 style="margin-bottom: 2rem">Kindly upload your CV</h5>
+                    @*<input type="file" id="CV" name="CVFile" required>*@
+
+                    <div class="custom-file">
+                        <input type="file" name="CVFile" class="form-control custom-file-input" required />
+                        <label class="custom-file-label">Upload CV</label>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button style="margin-left:auto;margin-right:auto" type="submit" class="btn">Done</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    @*Modal for uploading CV OR changing CV*@
+
+    <div id="uploadChangeCvModal" class="modal">
+        <form enctype="multipart/form-data" method="post" asp-controller="User" asp-action="UploadCV">
+
+            <div class="modal-content">
+
+                <div class="modal-headerr">
+                    <h5 style="text-align:center"><span id="uploadCVHeader">Upload Your CV</span><span class="close" onclick="closeModal()">&times;</span></h5>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <h5 style="margin-bottom: 2rem">Kindly upload your CV</h5>
+                    @*<input type="file" id="CV" name="CVFile" required>*@
+
+                    <div class="custom-file">
+                        <input type="file" name="CVFile" class="form-control custom-file-input" required />
+                        <label class="custom-file-label">Upload CV</label>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button style="margin-left:auto;margin-right:auto" type="submit" class="btn">Done</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    @*Notification Modal if successfully submitted OR any other msg*@
+
+    <div id="myModal" class="modal">
+
+        <div class="modal-content">
+            <div class="modal-headerr" style="text-align:center">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h4>Submit Request</h4>
+            </div>
+
+
+            <div class="modal-body">
+
+                <h5 id="notification" style="margin-bottom: 2rem"></h5>
+            </div>
+
+            <div style="text-align:center" class="modal-footer">
+                <button style="margin-left:auto;margin-right:auto" class="btn" onclick="closeModal()">Ok</button>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="loading-modal"><!-- Place at bottom of page --></div>
+
+    @*Initializing variables*@
+    <script>
+
+        var result = @TempData["uploadCvAndRequestReview"];
+
+        if (result != null) {
+
+            modal = document.getElementById("myModal");
+            var msg = ''
+
+            if (!result.toString().includes('error')) {
+
+                msg = "Your Request Has Been Submitted Successfully and your request ID is: " + result.toString();
+            }
+            else {
+                msg = result.substring(result.indexOf(":") + 1);
+            }
+
+            document.getElementById("notification").innerText = msg
+            modal.style.display = 'block';
+        }
+
+        else {
+
+            var modal = '';
+            if ("@string.IsNullOrEmpty(Model.CV)" != "True")// not an empty CV
+                modal = document.getElementById("myModal");
+
+            else
+                modal = document.getElementById("uploadChangeCvModal");
+        }
+    </script>
+
+    <script>
+
+        function uploadCV(event) {
+
+            // event.target: to know the element which triggered that function
+            if (event.target.className.indexOf("changeCvBtn") > -1) {
+
+                //document.getElementById("uploadCVHeader").innerText = ""
+                document.getElementById("uploadCVHeader").innerText = "Change Your CV"
+
+            }
+            modal = document.getElementById("uploadChangeCvModal");
+            modal.style.display = "block";
+        }
+
+        function closeModal() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function (event) {
+            if (event.target == document.getElementById("myModal")) {
+                modal.style.display = "none";
+            }
+        }
+
+    </script>
+
+    <script>
+
+        function requestCVReview() {
+
+            var hasCV = '@Model.CV';
+
+            if (hasCV != '')// not an empty CV
+            {
+                // bs el a7san en yeb2a feh
+                // modal 1 lel notification(en hwa et3mlo review request aw et3mal refuse lel request
+                // 3shan ay sbab) w modal 1 lel upload, w el content ele gwa hwa ele yet3'yar
+
+                $('body').toggleClass('loading');
+
+                $.ajax({
+                    url: '@Url.Action("RequestCVReview", "Critique")',
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    success: function (result) {
+
+                        if (!result.includes("error")) {
+                            //hena yetla3 modal
+                            //alert("Review submitted");
+                            modal = document.getElementById("myModal");
+                            var msg = "Your Request Has Been Submitted Successfully and your request ID is: " + result.substring(result.indexOf(":") + 1).toString()
+
+                            document.getElementById("notification").innerText = msg
+
+                            modal.style.display = 'block';
+                        }
+                        else { // can't submit a new request
+                            //w hena yetla3 modal tany, htla2y sbab el rafd gwa el string bta3 result
+
+                            modal = document.getElementById("myModal");
+
+                            var msg = result.substring(result.indexOf(":") + 1)
+                            document.getElementById("notification").innerText = msg
+
+                            modal.style.display = 'block';
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //alert('Failed to call ajax');
+                        document.getElementById("notification").innerText = "Can't submit CV request rigth now, Please try again later."
+                    }
+                });
+
+                $('body').toggleClass('loading');
+
+            }
+            else {
+
+                modal = document.getElementById("uploadAndRequestReviewModal");
+                //document.getElementById("uploadCVHeader").innerText = "You can't submit a request without uploading your CV"
+                modal.style.display = 'block';
+
+            }
+            //console.log(modal);
+
+        }
+    </script>
+
+
+    @*To display cv file name in the label*@
+    <script>
+
+        $(document).ready(function () {
+
+            $('.custom-file-input').on("change", function () {
+
+                var fileName = $(this).val().split("\\").pop();
+                console.log(fileName);
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>

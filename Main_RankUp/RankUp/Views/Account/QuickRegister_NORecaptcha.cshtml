@@ -1,0 +1,179 @@
+﻿@model RankUp.ViewModels.RegisterModel
+
+@{
+    Layout = null;
+
+}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="log into RankUp. Adjust your profile and start using our FREE services. Request a CV review and much more.">
+    <meta name="keywords" content="">
+    <title>RankUp - Quick Registration</title>
+    <!-- Favicon -->
+    <link href="~/Content/corporate-agency/images/favicon.ico" rel="icon">
+    <!-- Bundle -->
+    <link href="~/Content/vendor/css/bundle.min.css" rel="stylesheet">
+    <!-- Plugin Css -->
+    <link href="~/Content/vendor/css/LineIcons.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/css/revolution-settings.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/css/jquery.fancybox.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Content/vendor/css/cubeportfolio.min.css" rel="stylesheet">
+    <!-- Style Sheet -->
+    <link href="~/Content/corporate-agency/css/navigation.css" rel="stylesheet">
+    <link href="~/Content/corporate-agency/css/line-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/corporate-agency/css/style.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <div class="quote-content" id="QuickRegisterModal">
+        <!--Heading-->
+        <div class="pb-md-5 p-0 text-center">
+            <span class="text-pink font-weight-500 font-20">Quick Register</span>
+            <h3 style="font-size:1.2rem" class="font-weight-600 text-white mt-2">Enter Your Information to procceed</h3>
+        </div>
+        <!--Contact Form-->
+        <form enctype="multipart/form-data" onsubmit="return checkPassword()" class="contact-form" id="modal-contact-form-data" method="post" asp-controller="Account" asp-action="QuickRegister">
+
+            <div class="form-row">
+
+                <div class="form-holder col-sm-6">
+                    <input type="text" placeholder="First Name" class="form-control" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-holder col-sm-6">
+                    <input type="text" placeholder="Last Name" class="form-control" id="lastName" name="lastName" required>
+                </div>
+            </div>
+
+
+            <div class="form-holder col-md-12">
+                <input class="form-control" id="email" name="email" placeholder="Email" required
+                       type="email">
+            </div>
+
+            <div class="form-holder col-md-12">
+                <input class="form-control" id="phone" name="phone" placeholder="Phone Number" required
+                       type="tel">
+            </div>
+
+
+            <div class="form-group row" style="color: #797979">
+
+                <label for="gender" class="col-sm-3">Gender:</label>
+
+                <div class="col-sm-9" style="padding:0rem">
+                    <input type="radio" class="col-sm-4" name="gender" value="M" checked>Male
+                    <input type="radio" class="col-sm-4" name="gender" value="F">Female
+                </div>
+            </div>
+
+            <div id="userPassword" class="col-md-12" style="padding-bottom:0.5rem">
+                <input class="form-control" id="password" name="password" placeholder="Password" required
+                       type="password">
+            </div>
+
+            <div id="userConfirmedPassword" class="col-md-12" style="padding-bottom:0.5rem">
+                <input class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required
+                       type="password">
+            </div>
+            <span id="passwordErrorMsg" style="display:none;" class="text-danger">Not matched passwords</span>
+
+
+
+            <div class="form-group row" style="padding-bottom:0.5rem">
+
+                @*<label asp-for="CV" class="col-form-label col-sm-2"></label>*@
+                @*<div class="col-sm-10">*@
+                <div class="custom-file">
+                    <input asp-for="CV" class="form-control custom-file-input" />
+                    <label class="custom-file-label">Upload CV</label>
+                </div>
+                @*</div>*@
+
+            </div>
+
+            @*<div class="form-check">
+                    <label class="checkbox-lable font-weight-200">
+                        Keep me logged in
+                        <input type="checkbox" name="rememberMe" id="rememberMe" value="true">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>*@
+            <!--Button-->
+            <div class="col-md-12">
+
+                <button style="margin-top:1rem" type="submit" class="btn btn-medium btn-rounded btn-pink">Register</button>
+            </div>
+        </form>
+    </div>
+
+
+    @* To display the CV name in the label*@
+    <script>
+
+        $(document).ready(function () {
+
+            $('.custom-file-input').on("change", function () {
+
+                var fileName = $(this).val().split("\\").pop();
+                console.log(fileName);
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+
+    </script>
+
+    <script>
+
+        function checkPassword() {
+
+            var password = document.getElementById("password").value;
+            var confirmedPassword = document.getElementById("confirmPassword").value;
+
+            var passwordErrorMsgSpan = document.getElementById("passwordErrorMsg");
+
+            if (password != confirmedPassword) {
+
+                passwordErrorMsgSpan.style.display = "block";
+                return false;
+            }
+            passwordErrorMsgSpan.style.display = "none";
+
+            return true;
+        }
+    </script>
+</body>
+</html>
+
+<style>
+    body, html {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        display: table;
+    }
+
+    body {
+        display: table-cell;
+        vertical-align: middle;
+        /*background-color:black;*/
+        background-image: url("../Content/corporate-agency/images/9144 (1).jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100% 100%;
+        /*filter: blur(8px);*/
+    }
+
+    #QuickRegisterModal {
+        display: table; /* shrinks to fit content */
+        margin: auto;
+        box-shadow: 5px 5px 15px black;
+        border-radius: 25px;
+    }
+</style>

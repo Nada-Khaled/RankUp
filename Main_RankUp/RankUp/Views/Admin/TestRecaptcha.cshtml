@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <title>recaptcha</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" >
+</head>
+
+<body>
+
+    <form method="post" asp-controller="Admin" asp-action="ValidateRecaptcha">
+
+        <div id="recaptcha" name="recaptcha" class="g-recaptcha" data-sitekey="6Lfcbc8cAAAAACG_hG87bM9T5yvpgf4sqrKzTO95"></div>
+
+        <button type="submit" class="btn btn-medium btn-rounded btn-pink">Register</button>
+
+    </form>
+
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+</body>
+</html>
+
+

@@ -1,0 +1,160 @@
+﻿@model RankUp.Models.BoardUsers
+@using Microsoft.AspNetCore.Hosting;
+
+@{
+
+    Layout = "~/Views/Shared/_navBar.cshtml";
+    ViewBag.Title = "RankUp - HR Panel";
+}
+
+<link rel="stylesheet" href="~/Content/BoardUsers/css/style.css" />
+
+<style>
+</style>
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="row grid-margin">
+            <h4 class="card-title">Select an operation to start Reviewing</h4>
+            <select id="operation" style="text-align:center;font-size:0.9rem" class="form-control form-control-lg" onchange="showRequestDetails()" >
+                <option value=""  disabled selected hidden>-- Select an operation --</option>
+                <option value="cv">Show Latest CV Request</option>
+                <option value="linkedin">Show Latest LinkedIn Request</option>
+                <option value="iv">Show Latest Interview simulation request</option>
+            </select>
+        </div>
+        @*Card choices*@
+       
+
+        @*Request details*@
+        <div id="request-deatils" class="row">
+
+            <div class="col grid-margin stretch-card">
+
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <div class="row">
+
+                            <h4 id="hdr" class="card-title"></h4>
+
+                        </div>
+
+                        <hr />
+
+                        <div class="row">
+                            <div class="col-6">
+                                <label>User Name: </label><p class="ml-2 mr-2" style="display: inline" id="user-name"></p>
+                            </div>
+                            <div class="col-6">
+                                <label>Phone: </label><p class="ml-2 mr-2" style="display: inline" id="user-mobile"></p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <label>Email: </label><p class="ml-2 mr-2" style="display: inline" id="user-email"></p>
+                            </div>
+                            <div class="col-6">
+                                <label>Request Date: </label><p class="ml-2 mr-2" style="display: inline" id="request-due-date"></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        @*show CV*@
+        <div id="cv-content" class="row">
+
+            <div class="card col">
+                <div class="card-body">
+                    <p style="float:left;margin:.5rem">In case the CV doesn't apear, <a style="cursor:pointer; color: #1a73e8" onclick="window.open('GetLatestCV', '_blank', 'noreferrer')">Click Here</a> to download it</p>
+                    <button style="float:right;margin:.5rem" type="button" class="btn btn-success btn-lg" onclick="window.open('Review', '_blank', 'noreferrer')">Start CV Review</button>
+                    <iframe style="height:70rem; width:100%" scrolling="auto"></iframe>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+</div>
+<!-- main-panel ends -->
+
+
+<script>
+
+    function showRequestDetails() {
+
+        document.getElementById('request-deatils').style.display = 'block';
+        //console.log(event.target)
+
+        document.getElementById('user-name').innerText = "";
+        document.getElementById('user-mobile').innerText = "";
+        document.getElementById('user-email').innerText = "";
+        document.getElementById('request-due-date').innerText = "";
+        var selectedval = document.getElementById('operation').value;
+        // to check for all the 3 tags, if any of them was clicked
+        if (selectedval=='cv'/*event.target == document.getElementById('cv') || event.target.parentElement == document.getElementById('cv') || event.target.parentElement.parentElement == document.getElementById('cv')*/) {
+
+            document.getElementById('hdr').innerText = "CV Request Details";
+            console.log(document.getElementById('hdr').innerText);
+
+            document.getElementById('user-name').innerText = '@Html.Raw(ViewBag.latestCV.user.firstName)' + " " + '@Html.Raw(ViewBag.latestCV.user.lastName)';
+            document.getElementById('user-mobile').innerText = '@Html.Raw(ViewBag.latestCV.user.PhoneNumber)';
+            document.getElementById('user-email').innerText = '@Html.Raw(ViewBag.latestCV.user.Email)';
+            document.getElementById('request-due-date').innerText = '@Html.Raw(ViewBag.latestCV.RequestDate)';
+
+            document.getElementById('cv-content').style.display = 'block';
+            //document.getElementById('cv-content').
+
+            @*console.log("---- user cv")
+            console.log('@ViewBag.latestCV.user.CV');
+            console.log("---- window location: host, port, protocol")
+            console.log(window.location.host)
+            console.log(window.location.port)
+            console.log(window.location.protocol)*@
+
+            var cvPath = window.location.protocol + "//" + window.location.host + "/" + "CVs/" + '@ViewBag.latestCV.user.CV'
+
+            document.getElementsByTagName('iframe')[0].src = cvPath
+            console.log(document.getElementsByTagName('iframe')[0].src)
+
+        }
+        else if (selectedval=='iv'/*event.target == document.getElementById('interview') || event.target.parentElement == document.getElementById('interview') || event.target.parentElement.parentElement == document.getElementById('interview')*/) {
+
+            document.getElementById('hdr').innerText = "Interview Request Details"
+
+            document.getElementById('user-name').innerText = '@Html.Raw(ViewBag.latestInterview.user.firstName)' + " " + '@Html.Raw(ViewBag.latestInterview.user.lastName)';
+            document.getElementById('user-mobile').innerText = '@Html.Raw(ViewBag.latestInterview.user.PhoneNumber)';
+            document.getElementById('user-email').innerText = '@Html.Raw(ViewBag.latestInterview.user.Email)';
+            document.getElementById('request-due-date').innerText = '@Html.Raw(ViewBag.latestInterview.RequestDate)';
+
+
+            document.getElementById('cv-content').style.display = 'none';
+
+        }
+        else if (selectedval=='linkedin'/*event.target == document.getElementById('linkedin') || event.target.parentElement == document.getElementById('linkedin') || event.target.parentElement.parentElement == document.getElementById('linkedin')*/) {
+
+            document.getElementById('hdr').innerText = "LinkedIn Request Details"
+
+            document.getElementById('user-name').innerText = '@Html.Raw(ViewBag.latestLinkedIn.user.firstName)' + " " + '@Html.Raw(ViewBag.latestLinkedIn.user.lastName)';
+            document.getElementById('user-mobile').innerText = '@Html.Raw(ViewBag.latestLinkedIn.user.PhoneNumber)';
+            document.getElementById('user-email').innerText = '@Html.Raw(ViewBag.latestLinkedIn.user.Email)';
+            document.getElementById('request-due-date').innerText = '@Html.Raw(ViewBag.latestLinkedIn.RequestDate)';
+
+
+            document.getElementById('cv-content').style.display = 'none';
+
+        }
+
+        }
+
+</script>
+

@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>SignUp - RankUp</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="assets/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="assets/vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="assets/vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"> -->
+
+
+    <style>
+        #otherEducationType {
+            display: none;
+        }
+
+        #otherBachelorUniversity {
+            display: none;
+        }
+
+        #otherMajor {
+            display: none;
+        }
+
+        #otherHigherDegreeUniversity {
+            display: none;
+        }
+
+        .educationType {
+            display: none;
+        }
+
+        /* Mark input boxes that gets an error on validation: */
+        input.invalid {
+            background-color: #ffdddd;
+        }
+
+        /* Mark input boxes that gets an error on validation: */
+        select.invalid {
+            background-color: #ffdddd;
+        }
+
+        /* Make circles that indicate the steps of the form: */
+        .step {
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbbbbb;
+            border: none;
+            border-radius: 50%;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        /* Mark the active step: */
+        .step.active {
+            opacity: 1;
+        }
+
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+            background-color: #04AA6D;
+        }
+
+        /* Hide all steps by default: */
+        .tab {
+            display: none;
+        }
+
+        #jobDetails {
+            display: none;
+            ;
+        }
+    </style>
+
+</head>
+
+<body style="background-color: black;">
+
+    <div class="container">
+
+        <!-- method="post" enctype="multipart/form-data"> -->
+        <form id="RegisterForm" onsubmit="stopDefault(event)"> 
+
+        <div class="col-md-8 grid-margin stretch-card" style="margin: auto;">
+            <div class="card mt-3 mb-3" style="height: 37.8rem;">
+                <div class="card-body mt-1">
+
+                    <div class="tab" id="1">
+
+                        <h4 class="card-title mb-2" style="padding-left: 45%;">Sign Up</h4>
+                        <label class="col-form-label">Personal Information:</label>
+                        <hr style="background-color: #36394b;">
+
+                        <div class="form-group">
+
+                            <div class="row">
+
+                                <div class="col-3">
+                                    <label>First Name</label>
+                                </div>
+
+                                <div class="col-9">
+
+                                    <input type="text" class="form-control" placeholder="First Name" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-3">
+                                    <label>Last Name</label>
+                                </div>
+
+                                <div class="col-9">
+
+                                    <input type="text" class="form-control" placeholder="Last Name" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Birth date</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" type="date" min="1940-01-01" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label">Phone</label>
+                            <div class="col-3">
+                                <select class="form-control">
+                                    <!-- <option value="" disabled selected hidden>Code</option> -->
+                                    <option value="+20" selected>+20</option>
+                                    <option value="+90">+90</option>
+                                    <option value="+996">+996</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <input id="phoneNumber" class="form-control" type="text" placeholder="Phone" required>
+                            </div>
+                            <span style="display:none;margin-left:52%;" class="errorSpans text-danger mb-2">Invalid
+                                phone number</span>
+                        </div>
+                        <!-- <span style="display:none;margin-left: 26%;" class="errorSpans text-danger mb-2">Please choose a
+                            code</span> -->
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Gender</label>
+                            <div class="col-sm-4">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="gender" value="M" checked>
+                                        Male </label>
+                                </div>
+                            </div>
+                            <div class="col-sm-5">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="gender" value="F"> Female
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab" id="2">
+
+                        <h4 class="card-title mb-2" style="padding-left: 45%;">Sign Up</h4>
+
+                        <label class="col-form-label">Personal Information:</label>
+                        <hr style="background-color: #36394b;">
+
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-3">
+                                    <label>Email</label>
+                                </div>
+
+                                <div class="col-9">
+
+                                    <input id="userEmail" type="email" class="form-control" placeholder="Email">
+                                </div>
+                                <span style="display:none;margin-left:27%;" class="errorSpans text-danger mb-2">Invalid Email</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-3">
+                                    <label>Password</label>
+                                </div>
+
+                                <div class="col-9">
+
+                                    <input id="password" name="password" type="password" class="form-control"
+                                        placeholder="Password" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+
+                                <div class="col-3">
+                                    <label>Confirm password</label>
+                                </div>
+
+                                <div class="col-9">
+
+                                    <input id="confirmPassword" name="confirmPassword" type="password"
+                                        class="form-control" placeholder="Confirm password" required>
+                                </div>
+                            </div>
+                        </div>
+                        <span id="passwordErrorMsg" style="display:none;margin-left: 26%;" class="text-danger mb-2">Not
+                            matched
+                            passwords</span>
+
+
+                        <div class="form-group row">
+
+                            <div class="col-3">
+                                <label class="col-form-label">Country</label>
+                            </div>
+
+                            <div class="col-3">
+                                <select class="form-control" required>
+                                    <option value="" disabled selected hidden>-- Country
+                                        --</option>
+
+                                    <option value="america">America</option>
+                                    <option value="italy">Italy</option>
+                                    <option value="russia">Russia</option>
+                                    <option value="britain">Britain</option>
+                                </select>
+                            </div>
+
+
+                            <div class="col-3">
+                                <label class="col-form-label ml-5">City</label>
+                            </div>
+
+                            <div class="col-3">
+                                <select class="form-control" required>
+                                    <option value="" disabled selected hidden>-- City
+                                        --</option>
+
+                                    <option value="america">America</option>
+                                    <option value="italy">Italy</option>
+                                    <option value="russia">Russia</option>
+                                    <option value="britain">Britain</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <!-- <span id="" style="display:none;margin-left: 26%;" class="errorSpans text-danger mb-2">Please
+                            choose a value</span> -->
+
+
+                        <div class="form-group row">
+                            <label class="col-3 col-form-label" >Area</label>
+                            <div class="col-9">
+                                <input class="form-control" type="text" placeholder="Area" required>
+
+                            </div>
+                        </div>
+
+                        <div class="custom-file mt-4 mb-4">
+                            <input type="file" name="personalPhoto" class="form-control custom-file-input" />
+                            <label class="custom-file-label" style="font-size: smaller;">Upload personal
+                                photo</label>
+                        </div>
+                        <!-- 
+                        <div class="form-check form-check-flat form-check-primary">
+                            <label class="form-check-label">
+                                <input type="checkbox" class="form-check-input"> Remember me </label>
+                        </div> -->
+                        <!-- <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-dark">Cancel</button> -->
+                    </div>
+
+                    <div class="tab" id="3">
+
+                        <!-- <h4 class="card-title mb-5" style="padding-left: 45%;">Educational Info</h4> -->
+                        <label class="col-form-label">Educational Information:</label>
+
+                        <hr style="background-color: #36394b;">
+
+                        <div class="form-group">
+
+                            <div class="form-group row">
+
+                                <div class="col-4">
+
+                                    <label class="col-form-label">Educational Level</label>
+                                </div>
+
+                                <div class="col-8">
+                                    <select id="educationLevel" class="form-control" onchange="getEducationLevel()" required>
+                                        <option value="" disabled selected hidden>-- Select Education Level
+                                            --</option>
+                                        <option value="high school">High school student</option>
+                                        <option value="bachelor">Bachelor's degree</option>
+                                        <option value="higherDegree">Master's degree</option>
+                                        <option value="higherDegree">Doctorate degree</option>
+                                        <option value="higherDegree">Vocational</option>
+                                        <option value="higherDegree">Diploma</option>
+
+                                        <!-- <option value="master">Master's degree</option>
+                                        <option value="doctorate">Doctorate degree</option>
+                                        <option value="vocational">Vocational</option>
+                                        <option value="diploma">Diploma</option>
+                                         -->
+                                    </select>
+                                </div>
+                            </div>
+                            <!-- <span style="display:none;margin-left: 35%;" class="errorSpans text-danger mb-2">Please
+                                choose a value</span> -->
+
+                        </div>
+
+                        <!-- Need to be edited -->
+                        <!-- the 3 options are displayed -->
+
+                        <div id="high school" class="form-group educationType">
+
+                            <div class="row mt-3">
+
+                                <label class="col-sm-4 col-form-label">Education System</label>
+                                <div class="col-sm-8">
+                                    <select id="education system" class="form-control" onchange="getEducationSystem()">
+                                        <option value="" disabled selected hidden>-- Select Education System
+                                            --</option>
+                                        <option value="american diploma">American Diploma</option>
+                                        <option value="canadian diploma">Canadian Diploma</option>
+                                        <option value="french baccalaureate">French Baccalaureate</option>
+                                        <option value="german abitur">German Abitur</option>
+                                        <option value="ib diploma">IB Diploma</option>
+                                        <option value="igcse">IGCSE</option>
+                                        <option value="national">National | Thanwya Amma</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            
+                            <!-- <span style="display:none;margin-left: 35%;" class="errorSpans text-danger mb-2">Please
+                                choose a value</span> -->
+
+                            <div id="otherEducationType">
+                                <div class="row mt-3">
+
+                                    <label class="col-sm-4 col-form-label">Other education system</label>
+                                    <div class="col-sm-8">
+
+                                        <input id="educationInput" class="otherInput form-control" type="text">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+
+                                <label class="col-sm-4 col-form-label">School Name</label>
+                                <div class="col-sm-8">
+                                    <input placeholder="School name" class="form-control" type="text">
+                                </div>
+
+
+                            </div>
+                            <!-- <span style="display:none;margin-left: 35%;" class="errorSpans text-danger mb-2">This field can't be empty</span> -->
+
+                            <div class="row mt-3">
+
+                                <label class="col-sm-4 col-form-label">Grade</label>
+                                <div class="col-sm-8">
+                                    <select id="grade" class="form-control" onchange="getGrade()">
+                                        <option value="" disabled selected hidden>-- Select Grade
+                                            --</option>
+                                        <option value="grade 10">Grade 10</option>
+                                        <option value="grade 11">Grade 11</option>
+                                        <option value="grade 12">Grade 12</option>
+                                    </select>
+                                </div>
+
+
+                            </div>
+                            <!-- <span style="display:none;margin-left: 35%;" class="errorSpans text-danger mb-2">Please
+                                choose a value</span> -->
+
+                        </div>
+
+
+                        <div id="bachelor" class="form-group educationType">
+
+                            <div class="row mt-3">
+
+                                <label class="col-sm-4 col-form-label">University /Institution</label>
+                                <div class="col-sm-8">
+                                    <select id="bachelorUniversity" class="form-control" onchange="getBachelor()">
+                                        <option value="" disabled selected hidden>-- Select University /Institution
+                                            --</option>
+                                        <option value="ain Shams">Ain Shams university</option>
+                                        <option value="cairo">Cairo university</option>
+                                        <option value="helwan">Helwan University</option>
+
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <!-- <span style="display:none;margin-left: 35%;" class="errorSpans text-danger mb-2">Please
+                                choose a value</span> -->
+
+                            <div id="otherBachelorUniversity">
+                                <div class="row mt-3">
+
+                                    <label class="col-sm-4 col-form-label">Other Bachelor</label>
+                                    <div class="col-sm-8">
+
+                                        <input id="bachelorUniversityInput" class="otherInput form-control" type="text">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+
+                                <label class="col-sm-4 col-form-label">Major</label>
+                                <div class="col-sm-8">
+                                    <select id="major" class="form-control" onchange="getMajor()">
+                                        <option value="" disabled selected hidden>-- Select Major
+                                            --</option>
+                                        <option value="ain Shams">Major 1</option>
+                                        <option value="cairo">Major 2</option>
+                                        <option value="helwan">Major 3</option>
+
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <!-- <span style="display:none;margin-left: 35%;" class="errorSpans text-danger mb-2">Please
+                                choose a value</span> -->
+
+                            <div id="otherMajor">
+                                <div class="row mt-3">
+
+                                    <label class="col-sm-4 col-form-label">Other Major</label>
+                                    <div class="col-sm-8">
+
+                                        <input id="majorInput" class="otherInput form-control" type="text">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <label class="col-sm-4 col-form-label">Graduation year</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="date" min="1960-01-01">
+                                </div>
+                            </div>
+                            <!-- <span style="display:none;margin-left: 35%;" class="errorSpans text-danger mb-2">This field can't be empty</span> -->
+                        </div>
+
+
+                        <div id="higherDegree" class="form-group educationType">
+
+
+                            <div class="row mt-3">
+
+                                <label class="col-sm-4 col-form-label">University /Institution</label>
+                                <div class="col-sm-8">
+                                    <select id="higherDegreeUniversity" class="form-control"
+                                        onchange="getHigherDegree()">
+                                        <option value="" disabled selected hidden>-- Select University /Institution
+                                            --</option>
+                                        <option value="ain Shams">Ain Shams university</option>
+                                        <option value="cairo">Cairo university</option>
+                                        <option value="helwan">Helwan University</option>
+
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <!-- <span style="display:none;margin-left: 35%;" class="errorSpans text-danger mb-2">Please
+                                choose a value</span> -->
+
+                            <div id="otherHigherDegreeUniversity">
+                                <div class="row mt-3">
+
+                                    <label class="col-sm-4 col-form-label">Other University</label>
+                                    <div class="col-sm-8">
+
+                                        <input id="higherDegreeUniversityInput" class="otherInput form-control" type="text">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+
+                                <label class="col-sm-4 col-form-label">Field of study</label>
+                                <div class="col-sm-8">
+
+                                    <input id="fieldOfStudyInput" class="form-control" type="text">
+
+                                </div>
+                            </div>
+                            <!-- <span style="display:none;margin-left: 35%;" class="errorSpans text-danger mb-2">This field can't be empty</span> -->
+
+                            <div class="form-group row mt-3">
+                                <label class="col-sm-4 col-form-label">Graduation year</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="date" min="1960-01-01">
+                                </div>
+                            </div>
+                            <!-- <span style="display:none;margin-left: 35%;" class="errorSpans text-danger mb-2">Please
+                                choose a value</span> -->
+                        </div>
+
+                    </div>
+
+                    <div class="tab" id="4">
+
+                        <div class="form-group">
+                            <label class="col-form-label">Current Job Status:</label>
+
+                            <hr style="background-color: #36394b;">
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="jobStatus" value="unemployed">
+                                    I'm unemployed and desperate for a job </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="jobStatus" value="lookingForJob">
+                                    I'm happy where I am but don't mind finding
+                                    good opportunities </label>
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="jobStatus"
+                                        value="notLookingForJob">
+                                    I'm not looking for a job </label>
+                            </div>
+                        
+                        </div>
+                        <span id="jobStatusErrorSpan" style="display:none;" class="text-danger mb-2">This field can't be empty</span>
+                        
+
+                        <div id="jobDetails" class="form-group">
+
+                            <label class="col-form-label">Current Job:</label>
+
+                            <hr style="background-color: #36394b;">
+
+                            <div>
+
+                                <div class="form-group row">
+
+                                    <div class="col-6 row">
+                                        <label class="col-5 col-form-label">Job title</label>
+                                        <div class="col-7">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!-- <span style="display:none;margin-left: 20%;" class="errorSpans text-danger mb-2">This field can't be empty</span> -->
+
+                                    <div class="col-6 row">
+                                        <label class="col-5 col-form-label">Company</label>
+                                        <div class="col-7">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                    <!-- <span style="display:none;margin-left: 20%;" class="errorSpans text-danger mb-2">This field can't be empty</span> -->
+                                </div>
+
+                                <div class="form-group row">
+
+                                    <label class="col-2 col-form-label mr-3">Start date</label>
+                                    <div class="col-9">
+                                        <input type="date" min="1960-01-01" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- <span style="display:none;margin-left: 20%;" class="errorSpans text-danger mb-2">Please
+                                    choose a value</span> -->
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <div class="custom-file mt-3 mb-3">
+                                <input type="file" name="CVFile" class="form-control custom-file-input" />
+                                <label class="custom-file-label" style="font-size: smaller;">Upload Your CV
+                                </label>
+                            </div>
+
+                            <a href="">Don't have a CV? Build your CV for free</a>
+
+                        </div>
+
+                        <!-- <div style="padding-left:2rem" class="g-recaptcha" data-sitekey="6Lfcbc8cAAAAACG_hG87bM9T5yvpgf4sqrKzTO95"></div> -->
+                        <div class="g-recaptcha" data-sitekey="6Lfcbc8cAAAAACG_hG87bM9T5yvpgf4sqrKzTO95"></div>
+
+
+                    </div>
+
+                    <!-- <div style="overflow:auto;"> -->
+                    <div style="position: absolute; bottom: 2rem; right: 3rem">
+                        <!--</div>style="float:right;">-->
+                        <button style="background-color: #1DB954; border-color: #1DB954;" type="button" class="btn btn-primary mr-2" id="prevBtn"
+                            onclick="nextPrev(-1)">Previous</button>
+                        <button style="background-color: #1DB954; border-color: #1DB954;" type="button" class="btn btn-primary mr-2" id="nextBtn"
+                            onclick="nextPrev(1)">Next</button>
+                    </div>
+                    <!-- </div> -->
+
+                    <!-- Circles which indicates the steps of the form: -->
+                    <!-- <div style="text-align:center;margin-top:40px;">
+                        <span class="step"></span>
+                        <span class="step"></span>
+                        <span class="step"></span>
+                    </div> -->
+
+
+                </div>
+            </div>
+
+        </div>
+
+        </form>
+    </div>
+
+    <script src="assets/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="assets/vendors/select2/select2.min.js"></script>
+    <script src="assets/vendors/typeahead.js/typeahead.bundle.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="assets/js/off-canvas.js"></script>
+    <script src="assets/js/hoverable-collapse.js"></script>
+    <script src="assets/js/misc.js"></script>
+    <script src="assets/js/settings.js"></script>
+    <script src="assets/js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="assets/js/file-upload.js"></script>
+    <script src="assets/js/typeahead.js"></script>
+    <script src="assets/js/select2.js"></script>
+
+    <!-- recaptcah -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+
+    <script>
+    
+        function validateEmail() {
+        
+            var email = document.getElementById("userEmail").value;
+            const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            
+            if(re.test(email)){
+            
+                $('#userEmail').removeClass(" invalid");
+                $('#userEmail').parent().next().css("display", 'none');
+            }
+            else{
+                
+                if (!$('#userEmail').hasClass("invalid"))
+                    $('#userEmail').addClass(" invalid");
+
+                $('#userEmail').parent().next().css("display", 'block');
+                
+            }
+            return re.test(email);
+        }
+        
+        function validatePhoneNumber() {
+        
+            if (isNaN($('#phoneNumber').val())) {
+
+                if (!$('#phoneNumber').hasClass("invalid"))
+                    $('#phoneNumber').addClass(" invalid");
+
+                $('#phoneNumber').parent().next().css("display", 'block');
+                
+                return false;
+                
+            }
+            else if ($('#phoneNumber').val() == '') {
+
+                if (!$('#phoneNumber').hasClass("invalid"))
+                    $('#phoneNumber').addClass(" invalid");
+    
+                $('#phoneNumber').parent().next().css("display", 'block');
+    
+                return false;
+
+            }
+            else if (!isNaN($('#phoneNumber').val())) {
+
+                $('#phoneNumber').removeClass(" invalid");
+                $('#phoneNumber').parent().next().css("display", 'none');
+                return true;
+            }
+        
+        }
+    </script>
+
+    <!-- Confirm Passwords -->
+    <script>
+        function checkPassword() {
+
+            var password = document.getElementById("password").value;
+            var confirmedPassword = document.getElementById("confirmPassword").value;
+
+            var passwordErrorMsgSpan = document.getElementById("passwordErrorMsg");
+
+            if (password != confirmedPassword) {
+
+                passwordErrorMsgSpan.style.display = "block";
+                return false;
+            }
+            passwordErrorMsgSpan.style.display = "none";
+
+            return true;
+        }
+    </script>
+
+    <!-- To display the CV name in the label -->
+    <script>
+        $(document).ready(function () {
+
+            $('.custom-file-input').on("change", function () {
+
+                var fileName = $(this).val().split("\\").pop();
+                console.log(fileName);
+                $(this).next('.custom-file-label').html(fileName);
+            });
+        });
+    </script>
+
+
+    <!-- To hide/ display current job details according to the job status-->
+    <script>
+        document.querySelectorAll('input[name="jobStatus"]').forEach((element) => {
+
+            element.addEventListener('change', function (event) {
+            
+                var jobDetailsDiv = document.getElementById("jobDetails");
+                var jobDetailsDivInputs = jobDetailsDiv.querySelectorAll('input');
+                
+                if (event.target.value != "unemployed"){
+                    
+                    jobDetailsDiv.style.display = 'block';
+                    
+                    for(var i = 0; i < jobDetailsDivInputs.length; i++){
+    
+                        jobDetailsDivInputs[i].setAttribute('required', 'required');
+                    }
+                    
+                }
+                else
+                {
+                    jobDetailsDiv.style.display = 'none';
+                    for(var i = 0; i < jobDetailsDivInputs.length; i++){
+    
+                        jobDetailsDivInputs[i].removeAttribute('required');
+                    }
+                }
+
+            })
+
+        })
+    </script>
+
+
+    <!-- To display the corresponding dropdown according to the selected option-->
+    <script>
+        var eduLevel, educationDiv;
+
+        function getEducationLevel() {
+
+            eduLevel = document.getElementById("educationLevel").value;
+            educationDiv = document.getElementById(eduLevel);
+
+            // To hide all divs then display the correct one
+            document.querySelectorAll(".educationType").forEach(function (element) {
+
+                element.style.display = "none";
+            });
+
+            // To hide all divs that have ids start with 'other'
+            $('[id^="other"]').css('display', 'none');
+
+            educationDiv.style.display = "block";
+            
+            // remove required attribute from all educationLevel divs in the current tab
+            var formTabs = document.getElementsByClassName("tab");
+            // var currentTabChildren = formTabs[currentTab].children;
+            var currentTabChildren = formTabs[currentTab].querySelectorAll('[required]')
+            console.log(">> currentTabChildren required: ", currentTabChildren.length)
+            console.log(currentTabChildren[0])
+            
+            for(var i = 0; i < currentTabChildren.length; i++){
+            
+                currentTabChildren[i].removeAttribute('required');
+            }
+            
+            
+            // add required attribute to the current displayed div
+            var educationLevelInputs = educationDiv.querySelectorAll('input');
+            var educationLevelSelects = educationDiv.querySelectorAll('select');            
+            for(var i = 0; i < educationLevelInputs.length; i++){
+                            
+                if(!educationLevelInputs[i].classList.contains('otherInput'))
+                    educationLevelInputs[i].setAttribute('required', 'required');
+            }
+            
+            for(var i = 0; i < educationLevelSelects.length; i++){
+            
+                educationLevelSelects[i].setAttribute('required', 'required');
+            }
+        }
+    </script>
+
+
+    <script>
+        var educationSys, educationGrade, educationBachelor, major, higherDegreeUniversity;
+        var gradeOptions = "";
+
+        function getEducationSystem() {
+
+            educationSys = document.getElementById("education system").value;
+
+            if (educationSys == "other") {
+                document.getElementById("otherEducationType").style.display = "block";
+                document.getElementById("otherEducationType").querySelector('input').setAttribute('required', 'required');
+                
+            } else{
+                document.getElementById("otherEducationType").style.display = "none";
+                document.getElementById("otherEducationType").querySelector('input').removeAttribute('required');
+            }
+
+            // change options el dropdown of el grade
+            if (educationSys == "national") {
+                gradeOptions = "";
+
+                gradeOptions += "<option value='' disabled selected hidden>-- Select Grade --</option>"
+                gradeOptions += "<option value='grade 10'>First Secondary</option>"
+                gradeOptions += "<option value='grade 11'>Second Secondary</option>"
+                gradeOptions += "<option value='grade 12'>Third Secondary</option>"
+            } else {
+                gradeOptions = "";
+
+                gradeOptions += "<option value='' disabled selected hidden>-- Select Grade --</option>"
+                gradeOptions += "<option value='grade 10'>Grade 10</option>"
+                gradeOptions += "<option value='grade 11'>Grade 11</option>"
+                gradeOptions += "<option value='grade 12'>Grade 12</option>"
+            }
+
+            document.getElementById("grade").innerHTML = "";
+            document.getElementById("grade").innerHTML = gradeOptions;
+        }
+
+        function getGrade() {
+
+            educationGrade = document.getElementById("grade").value;
+        }
+
+        function getBachelor() {
+
+            educationBachelor = document.getElementById("bachelorUniversity").value;
+
+            if (educationBachelor == "other") {
+                document.getElementById("otherBachelorUniversity").style.display = "block";
+                document.getElementById("otherBachelorUniversity").querySelector('input').setAttribute('required', 'required');
+                
+            } else{
+            document.getElementById("otherBachelorUniversity").style.display = "none";
+            document.getElementById("otherBachelorUniversity").querySelector('input').removeAttribute('required');
+            }
+        }
+
+        function getMajor() {
+
+            major = document.getElementById("major").value;
+
+            if (major == "other") {
+                document.getElementById("otherMajor").style.display = "block";
+                document.getElementById("otherMajor").querySelector('input').setAttribute('required', 'required');
+                
+            } else
+            document.getElementById("otherMajor").style.display = "none";
+            document.getElementById("otherMajor").querySelector('input').removeAttribute('required');
+        }
+
+        function getHigherDegree() {
+
+            higherDegreeUniversity = document.getElementById("higherDegreeUniversity").value;
+
+            if (higherDegreeUniversity == "other") {
+                document.getElementById("otherHigherDegreeUniversity").style.display = "block";
+                document.getElementById("otherHigherDegreeUniversity").querySelector('input').setAttribute('required', 'required');
+            } else{
+                document.getElementById("otherHigherDegreeUniversity").style.display = "none";
+                document.getElementById("otherHigherDegreeUniversity").querySelector('input').removeAttribute('required');
+            }
+        }
+    </script>
+
+
+    <script>
+        var currentTab = 0; // Current tab is set to be the first tab (0)
+        showTab(currentTab); // Display the current tab
+
+        function showTab(n) {
+            // This function will display the specified tab of the form...
+            var formTabs = document.getElementsByClassName("tab");
+            formTabs[n].style.display = "block";
+            //... and fix the Previous/Next buttons:
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display = "none";
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (formTabs.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+            //... and run a function that will display the correct step indicator:
+            // fixStepIndicator(n)
+        }
+
+        function nextPrev(n) {
+
+            // if n == 1: go to next tab
+            // ele if n == -1: go to prev page
+
+            // This function will figure out which tab to display
+            var formTabs = document.getElementsByClassName("tab");
+            
+            // Exit the function if any field in the current tab is invalid:
+            var validForm = true;
+            var validPhone = true;
+            var validEmail = true;
+            var validPasswords = true;
+            
+            // Only check for form validation if we go to next step
+            if(n == 1)
+                validForm = validateForm();
+                
+            if(currentTab == 0)
+                validPhone = validatePhoneNumber();
+            
+            if(currentTab == 1){
+                validEmail = validateEmail();
+                validPasswords = checkPassword();
+            }
+            if (n == 1 && (!validForm || !validPasswords || !validPhone || !validEmail)) {
+
+                console.log("Will not go to next step!!!!!")
+                return false;
+            }
+
+            // remove invalid class from inputs
+            invalidInputs = document.getElementsByClassName("invalid");
+            console.log("size of invalidInputs before remove invalid calss: ", invalidInputs.length)
+            for (var i = 0; i < invalidInputs.length; i++) {
+
+                invalidInputs[i].classList.remove("invalid");
+            }
+            console.log("size of invalidInputs after remove invalid calss: ", document.getElementsByClassName("invalid").length)
+
+            // hide error spans
+            errorSpans = document.getElementsByClassName("errorSpans");
+            for (var i = 0; i < errorSpans.length; i++) {
+                
+                errorSpans[i].style.display = 'none';
+            }
+
+            // Hide the current tab:
+            formTabs[currentTab].style.display = "none";
+            // Increase or decrease the current tab by 1:
+            currentTab = currentTab + n;
+            // if you have reached the end of the form...
+            if (currentTab >= formTabs.length) {
+                // ... the form gets submitted:
+                document.getElementById("RegisterForm").submit();
+                return false;
+            }
+            // Otherwise, display the correct tab:
+            showTab(currentTab);
+        }
+
+        function validateForm() {
+
+            // This function deals with validation of the form fields
+            var formTabs, formInputs, formSelectTags, i, valid = true;
+            formTabs = document.getElementsByClassName("tab");
+
+            var requiredFields = formTabs[currentTab].querySelectorAll('[required]');
+            
+            console.log("# requiredFields ", requiredFields.length)
+            
+            for(var i = 0; i < requiredFields.length; i++){
+            
+                if(requiredFields[i].type != "file"){
+                
+                    if (requiredFields[i].value == "") {
+                    
+                        if(!requiredFields[i].classList.contains("invalid")){
+                        
+                            requiredFields[i].className += " invalid";
+                            // requiredFields[i].style.backgroundColor = "#ffdddd";
+                        }
+                        
+                        // console.log("i for siblings: ", i)
+                        // // display the next span that contains an error msg  
+                        // if(requiredFields[i].parentNode.parentNode.nextElementSibling && requiredFields[i].parentNode.parentNode.nextElementSibling.tagName == 'span')
+                        //     requiredFields[i].parentNode.parentNode.nextElementSibling.style.display = 'block';
+                        
+                        valid = false;
+                        
+                    }
+                    else{
+                        
+                        requiredFields[i].classList.remove("invalid");
+                        // requiredFields[i].style.backgroundColor = "";
+                        
+                        // // hide the next span that contains an error msg
+                        // if(requiredFields[i].parentNode.parentNode.nextElementSibling && requiredFields[i].parentNode.parentNode.nextElementSibling.tagName == 'span')
+                        //     requiredFields[i].parentNode.parentNode.nextElementSibling.style.display = 'none';  
+                        
+                        // valid = true;
+                    }
+                    
+                }
+            }
+            
+            if(currentTab == formTabs.length - 1){
+                
+                var checkedJobStatus = document.querySelector('input[name="jobStatus"]:checked');
+
+                var jobStatusErrorSpan = document.getElementById('jobStatusErrorSpan');
+                console.log("1 style:")
+                console.log(jobStatusErrorSpan.style.display)
+                
+                if(checkedJobStatus)
+                {
+                    console.log('TRUE checkedJobStatus');
+                    jobStatusErrorSpan.style.display = "none";
+                }
+                else {
+                    
+                    console.log('FALSE checkedJobStatus');
+                    jobStatusErrorSpan.style.display = "block";
+                    valid = false;
+                }
+                
+                console.log("2 style:")
+                console.log(jobStatusErrorSpan.style.display)
+            }
+                
+
+            return valid; // return the valid status
+        }
+
+        // function fixStepIndicator(n) {
+        //     // This function removes the "active" class of all steps...
+        //     var i, steps = document.getElementsByClassName("step");
+        //     for (i = 0; i < steps.length; i++) {
+        //         steps[i].className = steps[i].className.replace(" active", "");
+        //     }
+        //     //... and adds the "active" class on the current step:
+        //     steps[n].className += " active";
+        // }
+    </script>
+
+<script>
+
+    function stopDefault(event){
+    
+        event.preventDefault();
+    }
+
+</script>
+
+</body>
+
+</html>

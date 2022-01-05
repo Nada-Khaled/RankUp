@@ -1,0 +1,18 @@
+labels ll charts ==> DONE
+months are incorrect ==> DONE
+dashboard by default active
+remove script file from _navbar ==> XXXXXX
+add in statistical table el user retention
+
+#of user not include el HR  ==> DONE
+
+==> try & catch
+
+==> DONE
+if(a5er mara 7asbna el rakam+7>=datatime.now.days){
+	e7sby mn gded
+	update fel table bta3 el statistical data
+}
+else{
+	haty el data ele gwa el statistical data
+}
